@@ -1,30 +1,45 @@
 %!TEX root = ../example.tex
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  uldiss.sty  Version 1
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Heavily modified by Malcolm Hutson (malcolm@louisiana.edu)
+% File:    uldiss.sty
+% Author:  UL CACS graduate students
+%
+% First adpted by Malcolm Hutson (malcolm@louisiana.edu)
 % to meet the Graduate School requirements of the 
 % University of Louisiana at Lafayette, Spring 2008
 %
-% Based on utdiss2.sty-05.sty
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Extensively modified by Adam Lewis (awlewis@cacs.louisiana.edu) to
+% meet the UL Graduate School requirements as of Spring 2011. 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                utdiss2.sty-05.sty (August 2002) 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Doctoral Dissertation Format Macros for The Univ. of Texas at Austin
-%     By Young U. Ryu
-% and some fixes by Miguel A. Lerma (malerma@math.utexas.edu)
-% and some more fixes by Craig McCluskey (mccluskey@mail.utexas.edu).
+% The template is based upon the Doctoral Dissertation Format Macros for
+% The Univ. of Texas at Austin By Young U. Ryu and some fixes by Miguel
+% A. Lerma (malerma@math.utexas.edu) and some more fixes by Craig
+% McCluskey (mccluskey@mail.utexas.edu).
 %
 % This file was first modified in October, 2001 by Craig W. McCluskey
 % to meet the Graduate School requirements of March, 2001. The name of
 % the file was changed to utdiss2.sty to distinguish it from the
 % original utdiss.sty of June 1991 and Miguel A. Lerma's utdiss1.sty.
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                utdiss2.sty-05.sty (August 2002) 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -42,11 +57,21 @@
 %
 % Note: This style file does not guarantee the satisfaction
 %       of all requirements specified by the Graduate School
+%       Users should always compare their document against the
+%       guidelines in regulations published by the UL Graduate School.
 %
-
 \typeout{*}
 \typeout{* UL Lafayette Doctoral Dissertation Format}
 \typeout{* arranged by Malcolm Hutson (malcolm@louisiana.edu)}
+\typeout{*}
+\typeout{* Modified by Adam Lewis (awlewis@cacs.louisiana.edu )}
+\typeout{* in Spring 2011 to meet Graduate School requirements}
+\typeout{* as of that semester.}
+\typeout{*}
+\typeout{* Note: This style file does not guarantee the satisifaction}
+\typeout{* of all requirements specified by the UL Graudate School.}
+\typeout{* Users should always compare their document against the}
+\typeout{* guidelines in regulations published by the UL Graduate School.}
 \typeout{*}
 \typeout{* Based on the U.T. Austin Doctoral Dissertation Format by}
 \typeout{* Young. U. Ryu, Miguel A. Lerma, Craig McCluskey}
@@ -541,7 +566,7 @@
 %       School Customizations                               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\def\schoolofcomputerscience{%
+\def\cacscmps{%
 	\typeout{*                        *}
 	\typeout{*                        *}
 	\typeout{*    COMPUTER SCIENCE    *}
@@ -550,6 +575,19 @@
 	\def\@degreeshort{S}
 	\def\@degreefield{Science}
 	\def\ma@jor{Computer Science}
+	\usepackage{template/acmtrans/acmtrans}
+	\bibliographystyle{template/acmtrans/acmtrans}
+}
+
+\def\cacseece{%
+	\typeout{*                        *}
+	\typeout{*                        *}
+        \typeout{*  COMPUTER ENGINEERING  *}
+	\typeout{*                        *}
+	\typeout{*                        *}
+	\def\@degreeshort{E}
+	\def\@degreefield{Engineering}
+	\def\ma@jor{Computer Engineering}
 	\usepackage{template/acmtrans/acmtrans}
 	\bibliographystyle{template/acmtrans/acmtrans}
 }
@@ -633,6 +671,23 @@
   
 }  % End of definition of dissertation.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define Dissertation.
+%
+\def\prospectus{%               % (awl8049, Spring 2011}
+  \typeout{*                        *}
+  \typeout{*                        *}
+  \typeout{* This is a prospectus   *}
+  \typeout{*                        *}
+  \typeout{*                        *}
+  
+  \def\doc@type{Prospectus}
+  \def\DOC@TYPE{PROSPECTUS}
+
+  \def\target@degree{Ph.D.}
+  \def\d@gree{Doctor of Philosophy}
+  
+}  % End of definition of dissertation.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

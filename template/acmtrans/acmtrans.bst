@@ -3,7 +3,7 @@
 %  Revised 28-MARCH-1996
 %  Revised 30-JUNE-1995
 %  Revised 15-JAN-1996 
-%  $Header: acmtrans.bst,v 1.2 96/01/17 09:05:38 boyland Exp $
+%  $Header: /local/repository/vmpowermgt/Prospectus/template/acmtrans/acmtrans.bst,v 1.1 2010/12/18 23:44:44 awl8049 Exp $
 %
 % Hacked by John T. Boyland at University of California, Berkeley
 % (with assistance by John R. Hauser)
