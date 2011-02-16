@@ -1,38 +1,92 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  example.tex, to be compiled with latex.                          %
-%%  08 April 2002	Version 4                                          %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                                                   %
-%%  Writing a Doctoral Dissertation with LaTeX at		                 %
-%%	the University of Louisiana			                                 %
-%%	                                                                 %
-%%	Requires uldiss.sty                                              %
-%%	                                                                 %
-%%  (Modify this ``template'' for your own dissertation.)            %
-%%                                                                   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% File:     example.tex
+%
+% Document based on the template for thesis and dissertations
+% developed by Steven White and Malcolm Hutson.
+%
+% Extensively modified by Adam Lewis (awlewis@cacs.louisiana.edu) to
+% meet the UL Graduate School requirements as of Spring 2011. 
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 \documentclass[12pt]{report}	% The documentclass must be ``report''.
 
 % Dissertation package style file.
 \usepackage{template/uldiss}  		
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Optional packages used for this sample dissertation. If you don't  %
-% need a capability in your dissertation, feel free to comment out   %
-% the package usage command.                                         %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{amsmath,amsthm,amsfonts,amscd}  % Some packages to write mathematics.
-\usepackage{eucal} 	 	      % Euler fonts
-\usepackage{verbatim}      	% Allows quoting source with commands.
-\usepackage{url}		        % Allows good typesetting of web URLs.
-\usepackage{graphicx,type1cm,eso-pic,color}
+% 
+% Here is a collection of optional packages that can make your life
+% far more pleasant while writing your thesis, prospectus, or
+% dissertation.   You should tailor these to match the specific needs
+% for your document.
+%
+\usepackage{amsmath,amsthm,amsfonts,amscd} % Some packages to write mathematics.
+\usepackage{eucal} % Euler fonts
+\usepackage{verbatim} % Allows quoting source with commands.
+% The listings package supports the pretty-printing of source code.
+% The listings packages supports the most commonly used programming
+% languages.
+\usepackage{listings}
+\lstloadlanguages{Matlab,C++,C,Pascal}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, 
+         %numbers=left,              
+         numberstyle=\tiny,          
+         %stepnumber=2,              
+         numbersep=5pt,              
+         tabsize=2,                  
+         extendedchars=true,         
+         breaklines=true,            
+         keywordstyle=textbf,    
+         stringstyle=\ttfamily, 
+         showspaces=false,       
+         showtabs=false,         
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false  
+ }
+% The caption package is used for fancy formatting of figure, table, and
+% other captions.  It is very useful when combined with the listings package.
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43, 0.35, 0.35,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
 \usepackage{pdfpages}
+%
+% The graphicx package is the standard package for importing of graphics
+% into LaTeX documents.   Note that we configure the package to, by
+% default, look for PNG, JPEG, and PDF files in a sub-directory of the
+% current directory.
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.png,.jpg,.pdf}
+\graphicspath{{graphics/}}
+%
+% Use the subfig package for dealing with multiple part figures.
+\usepackage[caption=false,labelfont=sf,textfont=sf,captionskip=5pt]{subfig}
+% 
+% The comment package is useful when you use EMACS for editing LaTeX
+% documents.  The table editor in EMACS orgtbl-mode interfaces with this
+% package for easy editing of tables using the org-mode table editing
+% functions. 
+\usepackage{comment}
 
-%\usepackage{draftwatermark}		% Uncomment this line to have the
+%\usepackage{draftwatermark}	% Uncomment this line to have the
 				% word, "DRAFT," as a background
 				% "watermark" on all of the pages of
 				% of your draft versions. When ready
@@ -40,86 +94,82 @@
 				% it out with a percent sign to remove
 				% the word draft before you run
 				% latex for the last time.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Document Type                                                      %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Document Type
+%
 % Choose a document type by commenting out every other type.
-
+%\prospectus
 \dissertation
 %\masterthesis
 %\masterreport
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% School Customizations                                              %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% School Customizations 
+%
 % Select your school
 % If your school is not listed, this template has not been specifically  
 %   customized for you yet, but the Grad School requirements will be met.
 %   Try one that might be similar.
 
-\schoolofcomputerscience
+\cacscmps
 %   ACM Transactions bibliography
+
+%\cacseecs
+%   ACM Transactions bilbiography
 
 %\schoolofmusic
 %   Chicago style bibliography with footnotes?
 
+%
+% Basic Information
+%
 
+\author{A. Grad Student}
+% Your name how it should normally appear across the document.
+% The graduate school requires that your name always appear identically
+%   every time that it is used. To help, we recommend use \theauthor
+%   wherever your name should be printed for consistency.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Basic Information                                                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\properauthor{Student, A. Grad}
+% Your proper name for alphabetizing. (Used in the abstract.)
+% Last, First Middle Suffix
 
-\author{Malcolm Hutson}
-  % Your name how it should normally appear across the document.
-  % The graduate school requires that your name always appear identically
-  %   every time that it is used. To help, we recommend use \theauthor
-  %   wherever your name should be printed for consistency.
-
-\properauthor{Hutson, Louis Malcolm III}
-  % Your proper name for alphabetizing. (Used in the abstract.)
-  % Last, First Middle Suffix
-
-\title{Interaction~Methods~for~Fully-Enclosed Virtual~Reality~Spaces}
-  % The title of your thesis/dissertation. Use a tilde (~) for any
-  %   spaces that should not be broken at line breaks.
+\title{A~Wonderful~Title~of~a~Dissertation}
+% The title of your thesis/dissertation. Use a tilde (~) for any
+%   spaces that should not be broken at line breaks.
 
 \dean{C. E. Palmer}
-  % The Dean of the Graduate School
+ % The Dean of the Graduate School
 
 %\degree{Master of Science}
-  % The full title of your degree. 
-  % The default value is guessed by the document type and school.
+% The full title of your degree. 
+% The default value is guessed by the document type and school.
   
 %\major{Computer Science}
   % Your major.
   % The default value is guessed by your school.
 
 %\graduationmonth{Spring}      
-  % Graduation semester, either Spring, Summer, or Fall, in the form
-  % as `\graduationmonth{Fall}'. Do not abbreviate.
-  % The default value (either Spring, Summer, or Fall) is guessed
-  % according to the time of running LaTeX.
+% Graduation semester, either Spring, Summer, or Fall, in the form
+% as `\graduationmonth{Fall}'. Do not abbreviate.
+% The default value (either Spring, Summer, or Fall) is guessed
+% according to the time of running LaTeX.
 
-%\graduationyear{2010}   
-  % Graduation year, in the form as `\graduationyear{2001}'.
-  % Use a 4 digit (not a 2 digit) number.
-  % The default value is guessed according to the time of running LaTeX.
+% \graduationyear{2010} Graduation year, in the form as
+% `\graduationyear{2001}'.  Use a 4 digit (not a 2 digit)
+% number.  The default value is guessed according
+%to the time of running LaTeX.
   
-\previousdegrees{Bachelor of Science, Tulane University, 2006; Master of Science, University of Louisiana at Lafayette, 2009; Doctor of Philosophy, University of Louisiana at Lafayette, \thegraduationmonth \ \thegraduationyear}
-  % List all of your degrees, including the degree you are seeking with this document!
+\previousdegrees{Bachelor of Science, Some University, 2006; Master of Science, University of Louisiana at Lafayette, 2009; Doctor of Philosophy, University of Louisiana at Lafayette, \thegraduationmonth \ \thegraduationyear}
+% List all of your degrees, including the degree you are seeking with
+% this document!
 
 \abstractwordcount{120}
-  % The number of words in your abstract.
-  % Unfortunately there is no clean way to count words in a section in Latex.
-
-
+% The number of words in your abstract.
+ % Unfortunately there is no clean way to count words in a section in Latex.
   
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %
 % Enter names of the member(s) of your committee. 
 % Put one name per line with the name in square brackets. 
@@ -142,26 +192,22 @@
   %
   % The default value is "Dr."
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Change the	Hyphenation behavior.                                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Change the	Hyphenation behavior.
+%
 %
 \hyphenation{FORTRAN Hy-phen-a-tion}
-  % Manually specify how certain words should be hyphenated, if needed.
-  % You may add words without hyphens to request that they not be hyphenated.
+% Manually specify how certain words should be hyphenated, if needed.
+% You may add words without hyphens to request that they not be hyphenated.
 
 %\hyphenpenalty=100000
-  % If you want no hyphenation in your document at all, uncomment
-  %   this line to set the hyphen penalty to an unreasonably
-  %   high value. 
+% If you want no hyphenation in your document at all, uncomment
+%   this line to set the hyphen penalty to an unreasonably
+%   high value. 
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Some optional commands to change the document's defaults.	         %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Some optional commands to change the document's defaults.
+%
 %
 %\singlespacing
 %\oneandonehalfspacing
@@ -184,9 +230,9 @@
 			% The default value is 0.125" 
 
 	
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%		The document starts here.			                                   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%The document starts here.
+%
 
 \makeindex              % Make the index
 
@@ -198,14 +244,13 @@
 
 \approvalpage           % Produces the approval page
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Dedication, epigraph, and/or acknowledgments are optional, but must occur here. %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Dedication, epigraph, and/or acknowledgments are optional, but must
+% occur here.
+%
 %
 \begin{dedication}
-Dedicated to my wife Shirley.
+Dedicated to the people who I really care about.
 \end{dedication}
 
 \begin{epigraph}
@@ -217,29 +262,78 @@ and z is keeping your mouth shut.\\
 \end{epigraph}
 
 \begin{acknowledgments}		% Optional
-I wish to thank the multitudes of people who helped me. Time would fail me to tell of \ldots I Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat vulputate dolor, eget dictum est gravida a. Sed sed est ligula, in volutpat eros. Morbi id diam libero, non egestas nunc. Ut leo odio, convallis vel sollicitudin eu, sodales dignissim lacus. Etiam quam mi, aliquam ac vulputate at, rhoncus eleifend ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras dolor libero, semper vel interdum sed, varius id tortor. Morbi fermentum erat et risus rhoncus volutpat. Mauris cursus, tortor et tincidunt commodo, justo turpis commodo eros, a blandit ante leo eget urna. Vivamus varius ipsum non diam varius sit amet rutrum elit dignissim. Aenean est lacus, sagittis quis lobortis sit amet, consequat non massa. Quisque iaculis lacinia consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet turpis eget quam pellentesque fermentum. Sed porttitor massa lacinia est sagittis varius. Nulla facilisi. Sed molestie porta tellus. Nunc neque velit, sollicitudin nec molestie quis, cursus sed ligula. Morbi at feugiat quam. Aenean tincidunt facilisis nisl in mollis.
+  I wish to thank the multitudes of people who helped me. Time would
+  fail me to tell of \ldots I Lorem ipsum dolor sit amet, consectetur
+  adipiscing elit. Sed volutpat vulputate dolor, eget dictum est gravida
+  a. Sed sed est ligula, in volutpat eros. Morbi id diam libero, non
+  egestas nunc. Ut leo odio, convallis vel sollicitudin eu, sodales
+  dignissim lacus. Etiam quam mi, aliquam ac vulputate at, rhoncus
+  eleifend ipsum. Pellentesque habitant morbi tristique senectus et
+  netus et malesuada fames ac turpis egestas. Cras dolor libero, semper
+  vel interdum sed, varius id tortor. Morbi fermentum erat et risus
+  rhoncus volutpat. Mauris cursus, tortor et tincidunt commodo, justo
+  turpis commodo eros, a blandit ante leo eget urna. Vivamus varius
+  ipsum non diam varius sit amet rutrum elit dignissim. Aenean est
+  lacus, sagittis quis lobortis sit amet, consequat non massa. Quisque
+  iaculis lacinia consectetur. Lorem ipsum dolor sit amet, consectetur
+  adipiscing elit. Mauris sit amet turpis eget quam pellentesque
+  fermentum. Sed porttitor massa lacinia est sagittis varius. Nulla
+  facilisi. Sed molestie porta tellus. Nunc neque velit, sollicitudin
+  nec molestie quis, cursus sed ligula. Morbi at feugiat quam. Aenean
+  tincidunt facilisis nisl in mollis.
 
-Donec congue, ligula ut lobortis ullamcorper, magna nibh mollis nulla, a dictum nisi est a tortor. Vivamus sit amet quam vel risus ornare consequat. Praesent eu massa non metus sollicitudin euismod. Pellentesque ligula ante, interdum at bibendum sed, bibendum quis felis. In quis eleifend mauris. Etiam ornare volutpat ligula, quis ullamcorper libero sollicitudin vitae. Mauris vel felis ut metus lacinia iaculis. Suspendisse dapibus, elit sit amet vestibulum egestas, diam arcu facilisis quam, nec suscipit neque urna non quam. Integer varius, quam sit amet fringilla faucibus, orci dui placerat augue, a imperdiet odio diam placerat eros. Etiam a lorem at felis rutrum faucibus vel eu dui. Aenean cursus cursus cursus. Cras vitae neque et felis aliquam suscipit.
+Donec congue, ligula ut lobortis ullamcorper, magna nibh mollis nulla, a
+dictum nisi est a tortor. Vivamus sit amet quam vel risus ornare
+consequat. Praesent eu massa non metus sollicitudin
+euismod. Pellentesque ligula ante, interdum at bibendum sed, bibendum
+quis felis. In quis eleifend mauris. Etiam ornare volutpat ligula, quis
+ullamcorper libero sollicitudin vitae. Mauris vel felis ut metus lacinia
+iaculis. Suspendisse dapibus, elit sit amet vestibulum egestas, diam
+arcu facilisis quam, nec suscipit neque urna non quam. Integer varius,
+quam sit amet fringilla faucibus, orci dui placerat augue, a imperdiet
+odio diam placerat eros. Etiam a lorem at felis rutrum faucibus vel eu
+dui. Aenean cursus cursus cursus. Cras vitae neque et felis aliquam
+suscipit.
 
-Etiam nec nunc quis lacus rhoncus commodo eu quis velit. Nunc eleifend odio vel lacus convallis posuere. Ut sed luctus lorem. Sed gravida feugiat varius. Mauris massa dui, mollis non lacinia id, ultrices ut lacus. Curabitur fringilla pellentesque ipsum sed molestie. Suspendisse et placerat neque. Proin tempus mauris quis dolor scelerisque pulvinar. Quisque ac posuere nisi. Phasellus quis velit elementum libero consectetur pellentesque ut quis neque. Nunc fermentum tempus lectus, nec posuere quam viverra vel. Mauris velit mi, rhoncus tincidunt cursus vel, rhoncus quis metus. Nullam eu viverra dui. Sed interdum porttitor malesuada. Proin nec condimentum lacus. Donec congue purus sit amet nisi molestie nec condimentum lorem adipiscing. Duis sagittis, est ut luctus convallis, arcu mauris aliquet dui, sit amet porttitor orci ipsum at neque. Donec non leo ac velit aliquet vestibulum.
+Etiam nec nunc quis lacus rhoncus commodo eu quis velit. Nunc eleifend
+odio vel lacus convallis posuere. Ut sed luctus lorem. Sed gravida
+feugiat varius. Mauris massa dui, mollis non lacinia id, ultrices ut
+lacus. Curabitur fringilla pellentesque ipsum sed molestie. Suspendisse
+et placerat neque. Proin tempus mauris quis dolor scelerisque
+pulvinar. Quisque ac posuere nisi. Phasellus quis velit elementum libero
+consectetur pellentesque ut quis neque. Nunc fermentum tempus lectus,
+nec posuere quam viverra vel. Mauris velit mi, rhoncus tincidunt cursus
+vel, rhoncus quis metus. Nullam eu viverra dui. Sed interdum porttitor
+malesuada. Proin nec condimentum lacus. Donec congue purus sit amet nisi
+molestie nec condimentum lorem adipiscing. Duis sagittis, est ut luctus
+convallis, arcu mauris aliquet dui, sit amet porttitor orci ipsum at
+neque. Donec non leo ac velit aliquet vestibulum.
 
-Aliquam erat volutpat. Etiam elit eros, fermentum non dapibus non, consectetur at urna. Praesent sit amet nisl ligula, nec ullamcorper turpis. Etiam gravida, magna nec sodales sollicitudin, nunc nunc tempus justo, vel rutrum velit nibh eget velit. In facilisis cursus sem in ornare. Proin sit amet fermentum elit. Integer dolor nunc, porta quis egestas eu, scelerisque ut lorem. Nunc sed diam risus. Morbi condimentum venenatis nisl eu interdum. Phasellus a ipsum mi. Donec eget sapien leo, quis viverra dui. Nunc volutpat enim in dui consectetur nec facilisis ante lobortis. Mauris erat diam, condimentum quis tincidunt quis, pulvinar viverra dolor. Aliquam nec convallis urna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut vitae nisi vitae nunc dictum porttitor sed eget lorem. Fusce eget odio sem, quis rhoncus nisl. Proin ut erat in ipsum ultricies auctor.
-
+Aliquam erat volutpat. Etiam elit eros, fermentum non dapibus non,
+consectetur at urna. Praesent sit amet nisl ligula, nec ullamcorper
+turpis. Etiam gravida, magna nec sodales sollicitudin, nunc nunc tempus
+justo, vel rutrum velit nibh eget velit. In facilisis cursus sem in
+ornare. Proin sit amet fermentum elit. Integer dolor nunc, porta quis
+egestas eu, scelerisque ut lorem. Nunc sed diam risus. Morbi condimentum
+venenatis nisl eu interdum. Phasellus a ipsum mi. Donec eget sapien leo,
+quis viverra dui. Nunc volutpat enim in dui consectetur nec facilisis
+ante lobortis. Mauris erat diam, condimentum quis tincidunt quis,
+pulvinar viverra dolor. Aliquam nec convallis urna. Pellentesque
+habitant morbi tristique senectus et netus et malesuada fames ac turpis
+egestas. Ut vitae nisi vitae nunc dictum porttitor sed eget lorem. Fusce
+eget odio sem, quis rhoncus nisl. Proin ut erat in ipsum ultricies
+auctor.
 \end{acknowledgments}
 
+% Table of Contents will be automatically generated and placed here.
+\tableofcontents   
+% List of Tables will be placed here, if applicabl.e
+\listoftables      
+% List of Figures will be placed here, if applicabl.e
+\listoffigures     
 
-
-\tableofcontents   % Table of Contents will be automatically generated and placed here.
-
-\listoftables      % List of Tables will be placed here, if applicable.
-
-\listoffigures     % List of Figures will be placed here, if applicable.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Actual text starts here.					                                 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Actual text starts here.%
 %
 % Including external files for each chapter makes this document simpler,
 % makes each chapter simpler, and allows for generating test documents
@@ -250,10 +344,33 @@ Aliquam erat volutpat. Etiam elit eros, fermentum non dapibus non, consectetur a
 %\include{chapter-introduction}
 
 \chapter{Introduction}
-	\section{Motivation}
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus urna. Ut suscipit nulla molestie libero pretium sed lacinia elit commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie rutrum vitae et leo.
+\section{Motivation}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique
+nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis
+dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a
+ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis
+laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra
+felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac
+orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu
+sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate
+quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus
+urna. Ut suscipit nulla molestie libero pretium sed lacinia elit
+commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas
+sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie
+rutrum vitae et leo.
 
-  Phasellus ante risus, porta quis pharetra ut, venenatis at neque. Duis porttitor convallis dui, ornare lobortis justo congue eu. Sed lacinia consectetur velit id posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam viverra venenatis placerat. Nunc non quam arcu, ac gravida nibh. Duis dignissim ligula eget nisl imperdiet pretium. Quisque non quam tellus. Maecenas ante nisl, sollicitudin ut tincidunt sed, euismod et sem. Proin hendrerit, nibh in sodales ultricies, enim purus varius neque, at mattis diam mauris eget justo. Maecenas tristique ligula ut nunc iaculis tincidunt. Nullam ut justo placerat nulla vehicula rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+Phasellus ante risus, porta quis pharetra ut, venenatis at neque. Duis
+porttitor convallis dui, ornare lobortis justo congue eu. Sed lacinia
+consectetur velit id posuere. Vestibulum ante ipsum primis in faucibus
+orci luctus et ultrices posuere cubilia Curae; Etiam viverra venenatis
+placerat. Nunc non quam arcu, ac gravida nibh. Duis dignissim ligula
+eget nisl imperdiet pretium. Quisque non quam tellus. Maecenas ante
+nisl, sollicitudin ut tincidunt sed, euismod et sem. Proin hendrerit,
+nibh in sodales ultricies, enim purus varius neque, at mattis diam
+mauris eget justo. Maecenas tristique ligula ut nunc iaculis
+tincidunt. Nullam ut justo placerat nulla vehicula rutrum. Pellentesque
+habitant morbi tristique senectus et netus et malesuada fames ac turpis
+egestas.
 \begin{figure}[htb]
   \centering
   \includegraphics[draft=false,width=0.4\linewidth]{ull1.jpg}
@@ -261,7 +378,20 @@ Aliquam erat volutpat. Etiam elit eros, fermentum non dapibus non, consectetur a
   \label{fig:ull1}
 \end{figure}
   
-  In consectetur consectetur pharetra. Vivamus luctus nisl quam, vitae egestas tortor. Nam turpis dui, dignissim iaculis faucibus fringilla, laoreet eu leo. In libero metus, ullamcorper quis ullamcorper et, porttitor vitae dolor. Sed eget faucibus odio. In nec diam vel quam malesuada blandit vel at velit. Nulla nec lorem enim, ut imperdiet nibh. In mi lorem, cursus eget blandit ut, luctus et dui. Duis dui felis, porttitor eu rhoncus in, rhoncus sit amet lacus. Cras vel erat lacus, id malesuada magna. Sed non augue sed lectus ullamcorper eleifend. Cras nec odio purus, quis convallis elit. Ut condimentum aliquet dolor in sodales. Phasellus id nisi purus. Vestibulum ante ante, lobortis non semper vel, adipiscing ac risus. Ut placerat nibh eget nisl mollis ut auctor massa accumsan. Nullam tempor, dui non malesuada luctus, nisl augue dapibus ante, vel pharetra nisl turpis a tellus. Duis molestie scelerisque blandit. Pellentesque nec rhoncus lectus.
+In consectetur consectetur pharetra. Vivamus luctus nisl quam, vitae
+egestas tortor. Nam turpis dui, dignissim iaculis faucibus fringilla,
+laoreet eu leo. In libero metus, ullamcorper quis ullamcorper et,
+porttitor vitae dolor. Sed eget faucibus odio. In nec diam vel quam
+malesuada blandit vel at velit. Nulla nec lorem enim, ut imperdiet
+nibh. In mi lorem, cursus eget blandit ut, luctus et dui. Duis dui
+felis, porttitor eu rhoncus in, rhoncus sit amet lacus. Cras vel erat
+lacus, id malesuada magna. Sed non augue sed lectus ullamcorper
+eleifend. Cras nec odio purus, quis convallis elit. Ut condimentum
+aliquet dolor in sodales. Phasellus id nisi purus. Vestibulum ante ante,
+lobortis non semper vel, adipiscing ac risus. Ut placerat nibh eget nisl
+mollis ut auctor massa accumsan. Nullam tempor, dui non malesuada
+luctus, nisl augue dapibus ante, vel pharetra nisl turpis a tellus. Duis
+molestie scelerisque blandit. Pellentesque nec rhoncus lectus.
 \begin{figure}[htb]
   \centering
   \includegraphics[draft=false,width=0.4\linewidth]{ull2.pdf}
@@ -269,21 +399,53 @@ Aliquam erat volutpat. Etiam elit eros, fermentum non dapibus non, consectetur a
   \label{fig:ull2}
 \end{figure}
   
-  Curabitur sapien enim, elementum sit amet mollis sed, convallis ac enim. Nulla nunc tortor, semper eu volutpat sit amet, mattis in eros. Quisque turpis risus, tincidunt nec euismod eu, aliquet vitae massa. Ut gravida est a sem volutpat a auctor lorem dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec erat id erat convallis cursus. Cras vitae fermentum tortor. Vivamus sit amet laoreet nisi. Duis eu ipsum nec nunc blandit dictum. Integer mollis suscipit justo, eget viverra eros feugiat vitae. Aliquam erat volutpat. Donec non lectus lacus. Donec pulvinar eleifend risus, fringilla consectetur felis dictum sed. Nam rhoncus lacinia odio, id sollicitudin diam placerat quis. Integer quis feugiat quam. Morbi id neque sapien. Morbi massa arcu, semper sit amet molestie eget, condimentum at nisl. Vestibulum eget nulla nisl, eget scelerisque velit. Aenean volutpat mollis lectus, vitae dapibus elit scelerisque nec.
+Curabitur sapien enim, elementum sit amet mollis sed, convallis ac
+enim. Nulla nunc tortor, semper eu volutpat sit amet, mattis in
+eros. Quisque turpis risus, tincidunt nec euismod eu, aliquet vitae
+massa. Ut gravida est a sem volutpat a auctor lorem dapibus. Lorem ipsum
+dolor sit amet, consectetur adipiscing elit. Phasellus nec erat id erat
+convallis cursus. Cras vitae fermentum tortor. Vivamus sit amet laoreet
+nisi. Duis eu ipsum nec nunc blandit dictum. Integer mollis suscipit
+justo, eget viverra eros feugiat vitae. Aliquam erat volutpat. Donec non
+lectus lacus. Donec pulvinar eleifend risus, fringilla consectetur felis
+dictum sed. Nam rhoncus lacinia odio, id sollicitudin diam placerat
+quis. Integer quis feugiat quam. Morbi id neque sapien. Morbi massa
+arcu, semper sit amet molestie eget, condimentum at nisl. Vestibulum
+eget nulla nisl, eget scelerisque velit. Aenean volutpat mollis lectus,
+vitae dapibus elit scelerisque nec.
 
-  Phasellus in lorem in lectus egestas tincidunt. Pellentesque consectetur magna eget tellus pellentesque eleifend. Curabitur eget nulla ac mi laoreet eleifend. Nullam blandit nunc eget quam posuere mollis. Sed dignissim erat feugiat sem sollicitudin pellentesque hendrerit eros tincidunt. Donec velit sem, volutpat at consectetur at, rutrum sit amet tellus. Mauris augue odio, gravida sit amet suscipit ac, scelerisque in erat. Donec sit amet tellus ante, quis pretium ante. Integer et lacus sed leo ultrices mollis. Praesent scelerisque gravida tempus
-	\section{Research Goals}
-	\section{Challenges is a Very Long Section Title Very Long Section Title That Will Wrap Around}
-	    \subsection{Challenges Subsection}
-	    \subsection{Challenges Subsection 2}
-	\section{Problem Statement}
-	\section{Research Issues}
-	\section{Contributions and Results}
-	\section{Dissertation Overview}
+Phasellus in lorem in lectus egestas tincidunt. Pellentesque consectetur
+magna eget tellus pellentesque eleifend. Curabitur eget nulla ac mi
+laoreet eleifend. Nullam blandit nunc eget quam posuere mollis. Sed
+dignissim erat feugiat sem sollicitudin pellentesque hendrerit eros
+tincidunt. Donec velit sem, volutpat at consectetur at, rutrum sit amet
+tellus. Mauris augue odio, gravida sit amet suscipit ac, scelerisque in
+erat. Donec sit amet tellus ante, quis pretium ante. Integer et lacus
+sed leo ultrices mollis. Praesent scelerisque gravida tempus
+\section{Research Goals}
+\section{Challenges is a Very Long Section Title Very Long Section Title That Will Wrap Around}
+\subsection{Challenges Subsection}
+\subsection{Challenges Subsection 2}
+\section{Problem Statement}
+\section{Research Issues}
+\section{Contributions and Results}
+\section{Dissertation Overview}
 
 \chapter{Background is a Very Long Chapter Title That Will Wrap Around, It's so Long That It's Still Going And Going}
-	\section{Fully-Enclosed Virtual Reality Spaces}
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus urna. Ut suscipit nulla molestie libero pretium sed lacinia elit commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie rutrum vitae et leo.
+\section{Fully-Enclosed Virtual Reality Spaces}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique
+nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis
+dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a
+ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis
+laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra
+felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac
+orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu
+sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate
+quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus
+urna. Ut suscipit nulla molestie libero pretium sed lacinia elit
+commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas
+sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie
+rutrum vitae et leo.
 
 \begin{table}[htb]
   \caption{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique nibh nec enim egestas lobortis.}
@@ -304,30 +466,87 @@ Aliquam erat volutpat. Etiam elit eros, fermentum non dapibus non, consectetur a
   \label{tbl:rotational-results}
 \end{table}
 
-  Phasellus ante risus, porta quis pharetra ut, venenatis at neque. Duis porttitor convallis dui, ornare lobortis justo congue eu. Sed lacinia consectetur velit id posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam viverra venenatis placerat. Nunc non quam arcu, ac gravida nibh. Duis dignissim ligula eget nisl imperdiet pretium. Quisque non quam tellus. Maecenas ante nisl, sollicitudin ut tincidunt sed, euismod et sem. Proin hendrerit, nibh in sodales ultricies, enim purus varius neque, at mattis diam mauris eget justo. Maecenas tristique ligula ut nunc iaculis tincidunt. Nullam ut justo placerat nulla vehicula rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+Phasellus ante risus, porta quis pharetra ut, venenatis at neque. Duis
+porttitor convallis dui, ornare lobortis justo congue eu. Sed lacinia
+consectetur velit id posuere. Vestibulum ante ipsum primis in faucibus
+orci luctus et ultrices posuere cubilia Curae; Etiam viverra venenatis
+placerat. Nunc non quam arcu, ac gravida nibh. Duis dignissim ligula
+eget nisl imperdiet pretium. Quisque non quam tellus. Maecenas ante
+nisl, sollicitudin ut tincidunt sed, euismod et sem. Proin hendrerit,
+nibh in sodales ultricies, enim purus varius neque, at mattis diam
+mauris eget justo. Maecenas tristique ligula ut nunc iaculis
+tincidunt. Nullam ut justo placerat nulla vehicula rutrum. Pellentesque
+habitant morbi tristique senectus et netus et malesuada fames ac turpis
+egestas.
 
-  In consectetur consectetur pharetra. Vivamus luctus nisl quam, vitae egestas tortor. Nam turpis dui, dignissim iaculis faucibus fringilla, laoreet eu leo. In libero metus, ullamcorper quis ullamcorper et, porttitor vitae dolor. Sed eget faucibus odio. In nec diam vel quam malesuada blandit vel at velit. Nulla nec lorem enim, ut imperdiet nibh. In mi lorem, cursus eget blandit ut, luctus et dui. Duis dui felis, porttitor eu rhoncus in, rhoncus sit amet lacus. Cras vel erat lacus, id malesuada magna. Sed non augue sed lectus ullamcorper eleifend. Cras nec odio purus, quis convallis elit. Ut condimentum aliquet dolor in sodales. Phasellus id nisi purus. Vestibulum ante ante, lobortis non semper vel, adipiscing ac risus. Ut placerat nibh eget nisl mollis ut auctor massa accumsan. Nullam tempor, dui non malesuada luctus, nisl augue dapibus ante, vel pharetra nisl turpis a tellus. Duis molestie scelerisque blandit. Pellentesque nec rhoncus lectus.
+In consectetur consectetur pharetra. Vivamus luctus nisl quam, vitae
+egestas tortor. Nam turpis dui, dignissim iaculis faucibus fringilla,
+laoreet eu leo. In libero metus, ullamcorper quis ullamcorper et,
+porttitor vitae dolor. Sed eget faucibus odio. In nec diam vel quam
+malesuada blandit vel at velit. Nulla nec lorem enim, ut imperdiet
+nibh. In mi lorem, cursus eget blandit ut, luctus et dui. Duis dui
+felis, porttitor eu rhoncus in, rhoncus sit amet lacus. Cras vel erat
+lacus, id malesuada magna. Sed non augue sed lectus ullamcorper
+eleifend. Cras nec odio purus, quis convallis elit. Ut condimentum
+aliquet dolor in sodales. Phasellus id nisi purus. Vestibulum ante ante,
+lobortis non semper vel, adipiscing ac risus. Ut placerat nibh eget nisl
+mollis ut auctor massa accumsan. Nullam tempor, dui non malesuada
+luctus, nisl augue dapibus ante, vel pharetra nisl turpis a tellus. Duis
+molestie scelerisque blandit. Pellentesque nec rhoncus lectus.
 
-  Curabitur sapien enim, elementum sit amet mollis sed, convallis ac enim. Nulla nunc tortor, semper eu volutpat sit amet, mattis in eros. Quisque turpis risus, tincidunt nec euismod eu, aliquet vitae massa. Ut gravida est a sem volutpat a auctor lorem dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec erat id erat convallis cursus. Cras vitae fermentum tortor. Vivamus sit amet laoreet nisi. Duis eu ipsum nec nunc blandit dictum. Integer mollis suscipit justo, eget viverra eros feugiat vitae. Aliquam erat volutpat. Donec non lectus lacus. Donec pulvinar eleifend risus, fringilla consectetur felis dictum sed. Nam rhoncus lacinia odio, id sollicitudin diam placerat quis. Integer quis feugiat quam. Morbi id neque sapien. Morbi massa arcu, semper sit amet molestie eget, condimentum at nisl. Vestibulum eget nulla nisl, eget scelerisque velit. Aenean volutpat mollis lectus, vitae dapibus elit scelerisque nec.
+Curabitur sapien enim, elementum sit amet mollis sed, convallis ac
+enim. Nulla nunc tortor, semper eu volutpat sit amet, mattis in
+eros. Quisque turpis risus, tincidunt nec euismod eu, aliquet vitae
+massa. Ut gravida est a sem volutpat a auctor lorem dapibus. Lorem ipsum
+dolor sit amet, consectetur adipiscing elit. Phasellus nec erat id erat
+convallis cursus. Cras vitae fermentum tortor. Vivamus sit amet laoreet
+nisi. Duis eu ipsum nec nunc blandit dictum. Integer mollis suscipit
+justo, eget viverra eros feugiat vitae. Aliquam erat volutpat. Donec non
+lectus lacus. Donec pulvinar eleifend risus, fringilla consectetur felis
+dictum sed. Nam rhoncus lacinia odio, id sollicitudin diam placerat
+quis. Integer quis feugiat quam. Morbi id neque sapien. Morbi massa
+arcu, semper sit amet molestie eget, condimentum at nisl. Vestibulum
+eget nulla nisl, eget scelerisque velit. Aenean volutpat mollis lectus,
+vitae dapibus elit scelerisque nec.
 
-  Phasellus in lorem in lectus egestas tincidunt. Pellentesque consectetur magna eget tellus pellentesque eleifend. Curabitur eget nulla ac mi laoreet eleifend. Nullam blandit nunc eget quam posuere mollis. Sed dignissim erat feugiat sem sollicitudin pellentesque hendrerit eros tincidunt. Donec velit sem, volutpat at consectetur at, rutrum sit amet tellus. Mauris augue odio, gravida sit amet suscipit ac, scelerisque in erat. Donec sit amet tellus ante, quis pretium ante. Integer et lacus sed leo ultrices mollis. Praesent scelerisque gravida tempus
-	\section{Head and Wand Tracking}
-	\section{Manipulation Devices}
+  Phasellus in lorem in lectus egestas tincidunt. Pellentesque
+  consectetur magna eget tellus pellentesque eleifend. Curabitur eget
+  nulla ac mi laoreet eleifend. Nullam blandit nunc eget quam posuere
+  mollis. Sed dignissim erat feugiat sem sollicitudin pellentesque
+  hendrerit eros tincidunt. Donec velit sem, volutpat at consectetur at,
+  rutrum sit amet tellus. Mauris augue odio, gravida sit amet suscipit
+  ac, scelerisque in erat. Donec sit amet tellus ante, quis pretium
+  ante. Integer et lacus sed leo ultrices mollis. Praesent scelerisque
+  gravida tempus
+\section{Head and Wand Tracking}
+\section{Manipulation Devices}
 
 \chapter{Related Work is also a Very Long Chapter Title That Will Wrap Around}
-	\section{Existing Tracking Technologies}
-	\section{Existing Interaction Technologies}
-	\section{Existing Technologies in Other Environments}
+\section{Existing Tracking Technologies}
+\section{Existing Interaction Technologies}
+\section{Existing Technologies in Other Environments}
 
 \chapter{Research Overview}
-	\section{Research Methodology}
-	\section{Architecture Overview}
+\section{Research Methodology}
+\section{Architecture Overview}
 
 \chapter{JanusVF}
-	\section{Abstract}
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus urna. Ut suscipit nulla molestie libero pretium sed lacinia elit commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie rutrum vitae et leo.
+\section{Abstract}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique
+nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis
+dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a
+ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis
+laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra
+felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac
+orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu
+sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate
+quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus
+urna. Ut suscipit nulla molestie libero pretium sed lacinia elit
+commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas
+sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie
+rutrum vitae et leo.
 \begin{table}[htb]
-  \caption{Curabitur sapien enim, elementum sit amet mollis sed, convallis ac enim. Nulla nunc tortor, semper eu volutpat sit amet, mattis in Eros.}
+\caption{Curabitur sapien enim, elementum sit amet mollis sed, convallis ac enim. Nulla nunc tortor, semper eu volutpat sit amet, mattis in Eros.}
   \centering
   \begin{tabular*}{0.35\textwidth}{@{\extracolsep{\fill}}r|r}
     \hline
@@ -343,75 +562,149 @@ Aliquam erat volutpat. Etiam elit eros, fermentum non dapibus non, consectetur a
   \label{tbl:free-motion-results}
 \end{table}
 
-  Phasellus ante risus, porta quis pharetra ut, venenatis at neque. Duis porttitor convallis dui, ornare lobortis justo congue eu. Sed lacinia consectetur velit id posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam viverra venenatis placerat. Nunc non quam arcu, ac gravida nibh. Duis dignissim ligula eget nisl imperdiet pretium. Quisque non quam tellus. Maecenas ante nisl, sollicitudin ut tincidunt sed, euismod et sem. Proin hendrerit, nibh in sodales ultricies, enim purus varius neque, at mattis diam mauris eget justo. Maecenas tristique ligula ut nunc iaculis tincidunt. Nullam ut justo placerat nulla vehicula rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-	\section{Introduction}
-	\section{Previous Work}
-	\section{Hardware}
-	\section{Software}
-	\section{Testing}
-	\section{Discussion}
+Phasellus ante risus, porta quis pharetra ut, venenatis at neque. Duis
+porttitor convallis dui, ornare lobortis justo congue eu. Sed lacinia
+consectetur velit id posuere. Vestibulum ante ipsum primis in faucibus
+orci luctus et ultrices posuere cubilia Curae; Etiam viverra venenatis
+placerat. Nunc non quam arcu, ac gravida nibh. Duis dignissim ligula
+eget nisl imperdiet pretium. Quisque non quam tellus. Maecenas ante
+nisl, sollicitudin ut tincidunt sed, euismod et sem. Proin hendrerit,
+nibh in sodales ultricies, enim purus varius neque, at mattis diam
+mauris eget justo. Maecenas tristique ligula ut nunc iaculis
+tincidunt. Nullam ut justo placerat nulla vehicula rutrum. Pellentesque
+habitant morbi tristique senectus et netus et malesuada fames ac turpis
+egestas.
+
+\section{Introduction}
+\section{Previous Work}
+\section{Hardware}
+\section{Software}
+\section{Testing}
+\section{Discussion}
 	
 \chapter{Infrared Patterns from Projector}
-	\section{Abstract}
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus urna. Ut suscipit nulla molestie libero pretium sed lacinia elit commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie rutrum vitae et leo.
+\section{Abstract}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique
+nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis
+dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a
+ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis
+laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra
+felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac
+orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu
+sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate
+quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus
+urna. Ut suscipit nulla molestie libero pretium sed lacinia elit
+commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas
+sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie
+rutrum vitae et leo.
 
-	\section{Introduction}
-	\section{Previous Work}
-	\section{Hardware}
-	\section{Software}
-	\section{Testing}
-	\section{Discussion}
+\section{Introduction}
+\section{Previous Work}
+\section{Hardware}
+\section{Software}
+\section{Testing}
+\section{Discussion}
 	
 \chapter{Wii Remote with LEDs at the Corners}
-	\section{Abstract}
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus urna. Ut suscipit nulla molestie libero pretium sed lacinia elit commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie rutrum vitae et leo.
+\section{Abstract}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique
+nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis
+dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a
+ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis
+laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra
+felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac
+orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu
+sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate
+quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus
+urna. Ut suscipit nulla molestie libero pretium sed lacinia elit
+commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas
+sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie
+rutrum vitae et leo.
 
-  Phasellus ante risus, porta quis pharetra ut, venenatis at neque. Duis porttitor convallis dui, ornare lobortis justo congue eu. Sed lacinia consectetur velit id posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam viverra venenatis placerat. Nunc non quam arcu, ac gravida nibh. Duis dignissim ligula eget nisl imperdiet pretium. Quisque non quam tellus. Maecenas ante nisl, sollicitudin ut tincidunt sed, euismod et sem. Proin hendrerit, nibh in sodales ultricies, enim purus varius neque, at mattis diam mauris eget justo. Maecenas tristique ligula ut nunc iaculis tincidunt. Nullam ut justo placerat nulla vehicula rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-	\section{Introduction}
-	\section{Previous Work}
-	\section{Hardware}
-	\section{Software}
-	\section{Testing}
-	\section{Discussion}
+Phasellus ante risus, porta quis pharetra ut, venenatis at neque. Duis
+porttitor convallis dui, ornare lobortis justo congue eu. Sed lacinia
+consectetur velit id posuere. Vestibulum ante ipsum primis in faucibus
+orci luctus et ultrices posuere cubilia Curae; Etiam viverra venenatis
+placerat. Nunc non quam arcu, ac gravida nibh. Duis dignissim ligula
+eget nisl imperdiet pretium. Quisque non quam tellus. Maecenas ante
+nisl, sollicitudin ut tincidunt sed, euismod et sem. Proin hendrerit,
+nibh in sodales ultricies, enim purus varius neque, at mattis diam
+mauris eget justo. Maecenas tristique ligula ut nunc iaculis
+tincidunt. Nullam ut justo placerat nulla vehicula rutrum. Pellentesque
+habitant morbi tristique senectus et netus et malesuada fames ac turpis
+egestas.
+
+\section{Introduction}
+\section{Previous Work}
+\section{Hardware}
+\section{Software}
+\section{Testing}
+\section{Discussion}
 
 \chapter{Marker-Based Hand Tracking}
-	\section{Abstract}
-	\section{Introduction}
-	\section{Previous Work}
-	\section{Hardware}
-	\section{Software}
-	\section{Testing}
-	\section{Discussion}
+\section{Abstract}
+\section{Introduction}
+\section{Previous Work}
+\section{Hardware}
+\section{Software}
+\section{Testing}
+\section{Discussion}
 	
 \chapter{Automatic Hand-held Interfaces}
-	\section{Abstract}
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus urna. Ut suscipit nulla molestie libero pretium sed lacinia elit commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie rutrum vitae et leo.
+\section{Abstract}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique
+nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis
+dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a
+ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis
+laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra
+felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac
+orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu
+sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate
+quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus
+urna. Ut suscipit nulla molestie libero pretium sed lacinia elit
+commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas
+sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie
+rutrum vitae et leo.
 
-  Phasellus ante risus, porta quis pharetra ut, venenatis at neque. Duis porttitor convallis dui, ornare lobortis justo congue eu. Sed lacinia consectetur velit id posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam viverra venenatis placerat. Nunc non quam arcu, ac gravida nibh. Duis dignissim ligula eget nisl imperdiet pretium. Quisque non quam tellus. Maecenas ante nisl, sollicitudin ut tincidunt sed, euismod et sem. Proin hendrerit, nibh in sodales ultricies, enim purus varius neque, at mattis diam mauris eget justo. Maecenas tristique ligula ut nunc iaculis tincidunt. Nullam ut justo placerat nulla vehicula rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-	\section{Introduction}
-	\section{Previous Work}
-	\section{Hardware}
-	\section{Software}
-	\section{Testing}
-	\section{Discussion}
+Phasellus ante risus, porta quis pharetra ut, venenatis at neque. Duis
+porttitor convallis dui, ornare lobortis justo congue eu. Sed lacinia
+consectetur velit id posuere. Vestibulum ante ipsum primis in faucibus
+orci luctus et ultrices posuere cubilia Curae; Etiam viverra venenatis
+placerat. Nunc non quam arcu, ac gravida nibh. Duis dignissim ligula
+eget nisl imperdiet pretium. Quisque non quam tellus. Maecenas ante
+nisl, sollicitudin ut tincidunt sed, euismod et sem. Proin hendrerit,
+nibh in sodales ultricies, enim purus varius neque, at mattis diam
+mauris eget justo. Maecenas tristique ligula ut nunc iaculis
+tincidunt. Nullam ut justo placerat nulla vehicula rutrum. Pellentesque
+habitant morbi tristique senectus et netus et malesuada fames ac turpis
+egestas.
+
+\section{Introduction}
+
+\section{Previous Work}
+
+\section{Hardware}
+
+\section{Software}
+
+\section{Testing}
+
+\section{Discussion}
 	
 \chapter{Conclusions and Future Work is also a Very Long Chapter Title That Will Wrap Around}
-	\section{Challenges Addressed}
-	\section{Research Issues Handled}
-	\section{Outcomes}
-		\subsection{Impact}
-		\subsection{Limitations}
-	\section{Future Research}
-	\section{Final Thoughts}
+\section{Challenges Addressed}
+\section{Research Issues Handled}
+\section{Outcomes}
+\subsection{Impact}
+\subsection{Limitations}
+\section{Future Research}
+\section{Final Thoughts}
 
 %\include{chapter11}	
 
 %\include{chapter12}	
-
-	
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Appendix/Appendices                                                %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Appendix/Appendices
 %
 % If you have only one appendix, use the command \appendix instead
 % of \appendices.
@@ -419,15 +712,12 @@ Aliquam erat volutpat. Etiam elit eros, fermentum non dapibus non, consectetur a
 \appendices
 
 %\include{chapter-appendix1}
-
 %\include{chapter-appendix2}
-
 %\include{chapter-appendix3}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Generate the bibliography.					                               %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Generate the bibliography.
+%
 
 \nocite{*}      % This command causes all items in the               %
                 % bibliographic database to be added to              %
@@ -438,27 +728,58 @@ Aliquam erat volutpat. Etiam elit eros, fermentum non dapibus non, consectetur a
 % Replace "example" with the name of your ".bib" file
 \bibliography{example}                      
 \index{Bibliography@\emph{Bibliography}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Generate the index.						                                     %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\printindex     % Include the index here. Comment out this line      %
-%               % with a percent sign if you do not want an index .  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%
+% Generate the index.
+% 
+%
+\printindex     % Include the index here. Comment out this line      
+%               % with a percent sign if you do not want an index .  
+%
 
 \begin{abstract}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus urna. Ut suscipit nulla molestie libero pretium sed lacinia elit commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie rutrum vitae et leo.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+  tristique nibh nec enim egestas lobortis. Cum sociis natoque penatibus
+  et magnis dis parturient montes, nascetur ridiculus mus. Praesent
+  vitae lorem a ante congue imperdiet. Aenean gravida lacus ac sem
+  pharetra facilisis laoreet elit facilisis. Integer ullamcorper blandit
+  lorem, at pharetra felis vestibulum a. Cras vitae elit non neque
+  lacinia euismod eget ac orci. Ut nibh ligula, porttitor eget facilisis
+  id, fringilla eu sapien. Vivamus in congue dui. Nunc lacus nunc,
+  ornare eu vulputate quis, auctor id lacus. Ut luctus interdum
+  ligula. Donec ac rhoncus urna. Ut suscipit nulla molestie libero
+  pretium sed lacinia elit commodo. Nulla a neque eget odio consequat
+  bibendum. Aliquam egestas sollicitudin eros at sollicitudin. Proin et
+  ipsum at dolor molestie rutrum vitae et leo.
 \end{abstract}
 
-
-
 \begin{biography}
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique nibh nec enim egestas lobortis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent vitae lorem a ante congue imperdiet. Aenean gravida lacus ac sem pharetra facilisis laoreet elit facilisis. Integer ullamcorper blandit lorem, at pharetra felis vestibulum a. Cras vitae elit non neque lacinia euismod eget ac orci. Ut nibh ligula, porttitor eget facilisis id, fringilla eu sapien. Vivamus in congue dui. Nunc lacus nunc, ornare eu vulputate quis, auctor id lacus. Ut luctus interdum ligula. Donec ac rhoncus urna. Ut suscipit nulla molestie libero pretium sed lacinia elit commodo. Nulla a neque eget odio consequat bibendum. Aliquam egestas sollicitudin eros at sollicitudin. Proin et ipsum at dolor molestie rutrum vitae et leo.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+  tristique nibh nec enim egestas lobortis. Cum sociis natoque penatibus
+  et magnis dis parturient montes, nascetur ridiculus mus. Praesent
+  vitae lorem a ante congue imperdiet. Aenean gravida lacus ac sem
+  pharetra facilisis laoreet elit facilisis. Integer ullamcorper blandit
+  lorem, at pharetra felis vestibulum a. Cras vitae elit non neque
+  lacinia euismod eget ac orci. Ut nibh ligula, porttitor eget facilisis
+  id, fringilla eu sapien. Vivamus in congue dui. Nunc lacus nunc,
+  ornare eu vulputate quis, auctor id lacus. Ut luctus interdum
+  ligula. Donec ac rhoncus urna. Ut suscipit nulla molestie libero
+  pretium sed lacinia elit commodo. Nulla a neque eget odio consequat
+  bibendum. Aliquam egestas sollicitudin eros at sollicitudin. Proin et
+  ipsum at dolor molestie rutrum vitae et leo.
 \end{biography}
 
 \end{document}
+% The following comment block is used by the different flavors of EMACS and
+% the AUCTEX package to manage multiple documents.  In order for AUCTEX
+% to understand you're working with multiple files, you should define
+% the TeX-master variable as a file local variable that identifies your
+% master document.
+%
+% Please do not remove.
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "example.tex"
+%%% End: 
