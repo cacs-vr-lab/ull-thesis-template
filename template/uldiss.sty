@@ -207,8 +207,6 @@
      \def\default@spacing{\baselineskip=20.5pt plus .5pt minus .2pt}}
  \def\singlespacing{%
      \def\default@spacing{\baselineskip=15.5pt plus .5pt minus .2pt}}
-
-
 %
 %     Table Of Contents
 %
@@ -223,13 +221,21 @@
 %  upon how you want your Table of Contents to look.
 %          05 Oct 2001  cwm
 %\newlength{\one@num}\setlength{\one@num}{0pt}  % 1.5em  % indent of \section
-\newlength{\one@num}\setlength{\one@num}{18pt}  % This line makes indent of
+%\newlength{\one@num}\setlength{\one@num}{18pt}  % This line makes indent of
             % \section such that section
             % numbers in Table of Contents
             % are centered under the word,
             % "Chapter" in the TOC line of
             % their chapter.
-\newlength{\two@num}\settowidth{\two@num}{9.9...}
+%\newlength{\two@num}\settowidth{\two@num}{9.9...}
+%NGL
+% UL Dissertation Guidelines: 
+%  Level 2 headings on your table of contents should 
+%  be indented .5" from the left margin.
+%  Level 3 headings on your table of contents should 
+%  be indented 1" from the left margin.
+\newlength{\one@num}\setlength{\one@num}{0.5in}%{52.5pt} 
+\newlength{\two@num}\setlength{\two@num}{0.5in}%{36pt}
 \newlength{\three@num}\settowidth{\three@num}{9.9.9...}
 \newlength{\four@num}\settowidth{\four@num}{9.9.9.9...}
 \newlength{\five@num}\settowidth{\five@num}{9.9.9.9.9...}
@@ -267,7 +273,37 @@
       \leavevmode
       \@tempdima #3\relax
       \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-      {#4\dotfill#5}%
+      {{\bf#4}\dotfill#5}
+      \par}%
+    \else
+      {
+      \vskip 12pt
+      %chapters at left margin
+      \parindent 0pt
+      \rightskip \@tocrmarg \parfillskip -\rightskip
+      %after changing parindent
+      \hangindent 81.125pt%98.75pt
+      {{\bf#4}\dotfill#5}%
+      \par}%
+    \fi 
+  \fi}
+   
+   %Because NGL can't figure out \ifnum right now
+%\renewcommand{\@tocrmarg}{4em}
+\def\@dottedtoclinealt#1#2#3#4#5{%
+  \ifnum #1>\c@tocdepth \else
+    %\righthyphenmin 62
+    %\hyphenpenalty=100000
+    \ifnum #1>0
+      \vskip \z@ \@plus.2\p@
+      {%lot and lof indent to match toc left margin
+      \leftskip 0pt\relax \rightskip \@tocrmarg \parfillskip -\rightskip
+      \parindent 0pt\relax\@afterindenttrue
+      %\interlinepenalty\@M
+      \leavevmode
+      \@tempdima #3\relax
+      \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
+      {{#4}\dotfill#5}
       \par}%
     \else
       {
@@ -277,8 +313,11 @@
       {{\bf#4}\dotfill#5}%
       \par}%
     \fi 
-  \fi}
-    
+  \fi
+}
+%\renewcommand{\@tocrmarg}{4em}
+  
+  
 \def\l@chapter{\@dottedtocline{0}{\c@onenum}{\five@num}}
 \def\l@section{\@dottedtocline{1}{\c@onenum}{\two@num}}
 \def\l@subsection{\@dottedtocline{2}{\c@twonum}{\three@num}}
@@ -314,8 +353,9 @@
 \def\@makechapterhead#1{  
   {\parindent 0pt \raggedleft 
     \ifnum \c@secnumdepth >\m@ne \center {\bf \@chapapp{} \thechapter}
-    \par
-    \par \centering \vskip 15pt \fi  \bf #1\par \nobreak \vskip 35pt
+        \par
+        \par \centering %\vskip 15pt 
+    \fi  \bf #1\par \nobreak \vskip 35pt
   }}
 
 
@@ -469,8 +509,22 @@
   \@startsection{section}{1}{\z@}%
   {2.3ex plus -1ex minus -.2ex}{.3ex plus .2ex}{\bf\normalsize}}
 \def\subsection{\@startsection{subsection}{2}{\z@}%
-  {1.5ex plus -1ex minus -.2ex}{.2ex plus .2ex}{\bf\normalsize}}
+            {1.5ex plus -1ex minus -.2ex}
+            %{.2ex plus .2ex}
+            {-.1ex}
+            %level 2 headings 0.5in from margin
+            {\indent\bf\normalsize}}
 
+%NGL Appendix hack
+%\def\appsubsection{\@startsection{section}{2}{\z@}%
+%            {2.3ex plus -1ex minus -.2ex}{.3ex plus .2ex}{\bf\normalsize}}
+            
+%\def\appsubsubsection{\@startsection{subsection}{2}{\z@}%
+%            {1.5ex plus -1ex minus -.2ex}
+            %{.2ex plus .2ex}
+%            {-.1ex}
+%            {\bf\normalsize}}
+            
 % Changed definition of subsubsection below from first line (commented
 % out) to second line. For some reason (buried in the depths of TeX,
 % most likely) using the parameter 3 causes the subsubsections to not
@@ -484,7 +538,11 @@
       % Change formatting of subsubsection headings
       % to same as subsections.
       %    13 Mar 2002  cwm
-  {3.9ex plus -1ex minus -.2ex}{.2ex plus .2ex}{\normalsize\bf}}
+  %{3.9ex plus -1ex minus -.2ex}
+  {1.5ex plus -1ex minus -.2ex}
+  %{.2ex plus .2ex}
+  {-.1ex}
+  {\it\normalsize}}
 
 
 
@@ -577,6 +635,7 @@
 	\def\ma@jor{Computer Science}
 	\usepackage{template/acmtrans/acmtrans}
 	\bibliographystyle{template/acmtrans/acmtrans}
+	%\setlength\bibitemsep{\baselineskip} %{1.5\itemsep}
 }
 
 \def\cacseece{%
@@ -590,6 +649,7 @@
 	\def\ma@jor{Computer Engineering}
 	\usepackage{template/acmtrans/acmtrans}
 	\bibliographystyle{template/acmtrans/acmtrans}
+	\setlength\bibitemsep{\baselineskip}%{1.5\itemsep}
 }
 
 
@@ -768,16 +828,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Print the signature lines for the committee.   LMH 2008
-%
+%                                                NGL 2020
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\signturelines{%
-  \noindent
   \setlength{\tabcolsep}{0ex}
-  
-  \begin{tabular}{ p{2.75in} p{0.6in} p{2.75in} }
-    \cline{1-1}  
+  \begin{tabular}{%NGL
+  >{\raggedright\arraybackslash}p{2.875in} p{0.5in}%
+  >{\raggedright\arraybackslash}p{2.875in} }%
+    \cline{1-1}
     \ifnum\numberofmembers>1 \cline{3-3} \fi 
-    \committeemembera, Chair \par \committeememberatitle 
+    %NGL
+    \rule{0pt}{3ex}\committeemembera, Chair \par \committeememberatitle 
     &  & 
     \ifnum\numberofmembers>1 \committeememberb \par \committeememberbtitle \fi
     \tabularnewline
@@ -786,7 +847,7 @@
     
     \ifnum\numberofmembers>2 \cline{1-1} \fi
     \ifnum\numberofmembers>3 \cline{3-3} \fi
-    \ifnum\numberofmembers>2 \committeememberc \par \committeememberctitle \fi
+    \ifnum\numberofmembers>2 \rule{0pt}{3ex}\committeememberc \par \committeememberctitle \fi
     &  & 
     \ifnum\numberofmembers>3 \committeememberd \par \committeememberdtitle \fi
     \tabularnewline
@@ -795,7 +856,7 @@
     
     \ifnum\numberofmembers>4 \cline{1-1} \fi
     \ifnum\numberofmembers>5 \cline{3-3} \fi
-    \ifnum\numberofmembers>4 \committeemembere \par \committeememberetitle \fi
+    \ifnum\numberofmembers>4 \rule{0pt}{3ex}\committeemembere \par \committeememberetitle \fi
     &  & 
     \ifnum\numberofmembers>5 \committeememberf \par \committeememberftitle \fi
     \tabularnewline
@@ -940,6 +1001,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %       Approval Page  LMH 2008
+%                      NGL 2020
 %
 \def\approvalpage{
   \pagestyle{empty}
@@ -956,11 +1018,11 @@
   %This space is the first to be sacrificed
   \vspace{108pt}
 
-  APPROVED:
+  \noindent APPROVED: % NGL
   
   \vspace*{40pt}
 
-  \signturelines
+  \noindent\signturelines
 
   \clearpage
   }
@@ -968,12 +1030,16 @@
 
 
 %
-%       Copyright Page
+%       Copyright Page      NGL 2020
 %
 \def\copyrightpage{\pagestyle{empty}
   % 32 single spaced lines
-  \vspace*{384pt}
-  \doublespacing
+  %\vspace*{384pt}
+  %NGL
+  \null
+  \vfill
+  %\doublespacing
+  \doublespacing\default@spacing
   \centerline{\copyright\  \au@thor}
   \centerline{\graduation@year}
   \centerline{All Rights Reserved}
@@ -987,8 +1053,9 @@
 \newenvironment{dedication}{\pagestyle{empty}
   \index{Dedication@\emph{Dedication}}%
   \addcontentsline{toc}{chapter}{Dedication}
-  \shortchapter*{Dedication}
-  \vspace*{170pt}\begin{center}\default@spacing}%
+  \shortchapter*{}%Dedications}
+  %\vspace*{170pt}
+  \begin{center}\default@spacing}%
   {\end{center}\clearpage}
 
 
@@ -999,14 +1066,15 @@
 \newenvironment{epigraph}{\thispagestyle{empty}
   \index{Epigraph@\emph{Epigraph}}%
   \addcontentsline{toc}{chapter}{Epigraph}
-  \shortchapter*{Epigraph}
-  \vspace*{170pt}\begin{center}\default@spacing}%
+  \shortchapter*{}%Epigraph}
+  %\vspace*{170pt}
+  \begin{center}\default@spacing}%
   {\end{center}\clearpage}
 
 
 
 %
-%       Title Page
+%       Title Page      NGL 2020
 %
 \def\titlepage{\pagestyle{empty}
   \vspace*{72pt}
@@ -1015,7 +1083,10 @@
   \ti@tle    % Mixed case title.
   \end{center}
   \vspace*{96pt}
-  \baselineskip=24pt
+  %\baselineskip=24pt
+  %\baselineskip=2em
+  %NGL
+  \doublespacing\default@spacing
   \begin{center}
   A \doc@type\\
   Presented to the\\
@@ -1033,8 +1104,6 @@
   \clearpage
   }
 
-
-
 %
 %       Acknowledgments
 % 
@@ -1042,6 +1111,10 @@
   \shortchapter*{Acknowledgments}
   \index{Acknowledgments@\emph{Acknowledgments}}%
   \addcontentsline{toc}{chapter}{Acknowledgments}
+    \doublespacing
+  \default@spacing
+  \default@par
+  \vspace{-1em}
   }
 
 
@@ -1080,8 +1153,9 @@
 
   \vspace{12pt}
 
-  \centerline{ABSTRACT}
-  \oneandonehalfspacing
+  \centerline{\textbf{Abstract}}
+  %\oneandonehalfspacing
+  \doublespacing
   \default@spacing
   }{\doublespacing\default@spacing}
 
@@ -1149,10 +1223,10 @@
 %
 %       List of Figures page
 %
-\def\l@figure{\@dottedtocline{1}{\c@onenum}{\four@num}}
-\def\figure@name{Figure}
+\def\l@figure{\@dottedtoclinealt{1}{\c@onenum}{\four@num}}
+\def\figure@name{{Figure}}
 \renewcommand\thefigure {\thechapter.\@arabic\c@figure}
-\def\fnum@figure{\figure@name\space\thefigure}
+\def\fnum@figure{{\figure@name\space\thefigure}}
 \def\listoffigures{%
   \shortchapter*{List of Figures}
   \addcontentsline{toc}{chapter}{List of Figures}
@@ -1161,6 +1235,7 @@
   \fancyhf{} %Supress Page Numbers by deleting Header/Footer Info
   \pagestyle{plain}
   \renewcommand{\headrulewidth}{0.0pt}
+  %\setlength{\parindent}{0pt}
   \vskip \parskip
   \parskip=15.5pt plus .5pt minus .5pt
   \vskip -\parskip
@@ -1173,9 +1248,12 @@
 %
 %       List of Tables page
 %
-\def\l@table{\@dottedtocline{1}{\c@onenum}{\four@num}}
-\def\table@name{Table}
+\def\l@table{\@dottedtoclinealt{1}{\c@onenum}{\four@num}}
+%the word Table
+\def\table@name{{Table}}
+%chapter.count in list and text
 \renewcommand\thetable {\thechapter.\@arabic\c@table}
+%full Table Ch.C in text
 \def\fnum@table{\table@name\space\thetable}
 \def\listoftables{%
   \shortchapter*{List of Tables}
@@ -1188,6 +1266,7 @@
   \vskip \parskip
   \parskip=15.5pt plus .5pt minus .5pt
   \vskip -\parskip
+  
   \@starttoc{lot}
   \default@par
   }
