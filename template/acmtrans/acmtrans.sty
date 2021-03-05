@@ -245,6 +245,13 @@
    \labelwidth 0pt
    \leftmargin \bibindent
    \labelsep 0pt
+   \itemsep 1em % NGL double-space between bibliography entries
+   %% NGL hanging indent of 0.5in
+   %% stolen from https://latex.org/forum/viewtopic.php?t=9048
+    \advance\leftmargin .42in% change 20 pt according to your needs
+    \advance\leftmargin\labelsep
+    \setlength\itemindent{-.42in}% change using the inverse of the length used before
+   %% end hanging indent %%
    % \if@hyperref
    %   \itemindent -\bibindent
    % \fi
